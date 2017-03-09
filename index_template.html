@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="go-import" content="gonum.org/v1/ git https://github.com/gonum/gonum">
+    <title>Gonum | Welcome</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    {{.Shim}}
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron" style="background-color:white">
+            <h1 class="text-center">Gonum</h1>
+            <p class="text-center"><img src="https://raw.githubusercontent.com/gonum/license/master/gopher.png" width="200px" /></p>
+            <p class="text-center">Consistent, composable, and comprehensible scientific code</p>
+            <p class="text-center"><a class="btn btn-primary btn-lg" href="https://github.com/gonum" target="_blank" role="button">View the code</a></p>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <p>Manifesto goes here?</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <h2 class="text-center">Gonum by example...</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h4 class="text-justified">Click on the example acronyms or images below for interactive, runnable code, or click on the caption titles for additional documentation.</h4>
+            </div>
+        </div>
+        <hr> {{ range $package, $data := .ExampleData }}
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/{{$package}}">{{ $package }}</a></h2> {{ range $index, $example := $data }}
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a id="{{ $example.PkgName }}{{ $example.Type}}{{ $example.Name}}Link" href="#modalPlayground" role="button" data-toggle="modal"><h1 class="text-center">{{ if eq $example.Img "" }}{{ $example.Abbrev }}{{ else }}<img src={{ $example.Img }} width="100%">{{ end }}</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/{{$package}}#{{ $example.Type }}">{{ $example.PkgName }}.{{ $example.Type}}</a> {{ $example.Name}}</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalPlayground" tabindex="-1" role="dialog" aria-labelledby="modalPlayground">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalPlaygroundLabel"></h4>
+                    <p id="modalPlaygroundDoc"></p>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <button type="submit" class="btn btn-primary">Run</button>
+                        <button class="btn btn-default">Format</button>
+                        <div class="form-group">
+                            <label for="modalPlaygroundCode">Code</label>
+                            <textarea id="modalPlaygroundCode" class="form-control" rows="7" placeholder="Example code"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalPlaygroundOutput">Output</label>
+                            <textarea readonly id="modalPlaygroundOutput" class="form-control" rows="7" placeholder="Program output"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="gonum.github.io.js"></script>
+</body>
+
+</html>

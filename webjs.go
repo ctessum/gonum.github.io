@@ -12,13 +12,16 @@ import (
 func main() {
 	doc := dom.GetWindow().Document()
 
-	setupLinks(doc)
+	codeChan := setupLinks(doc)
+
+	playground(codeChan)
 }
 
-func setupLinks(doc dom.Document) {
+func setupLinks(doc dom.Document) chan string {
+	codeChan := make(chan string)
 	modalPlaygroundLabel := doc.GetElementByID("modalPlaygroundLabel").(*dom.HTMLHeadingElement)
 	modalPlaygroundDoc := doc.GetElementByID("modalPlaygroundDoc").(*dom.HTMLParagraphElement)
-	modalPlaygroundCode := doc.GetElementByID("modalPlaygroundCode").(*dom.HTMLTextAreaElement)
+	modalPlaygroundCode := doc.GetElementByID("code").(*dom.HTMLTextAreaElement)
 	for pkg, data := range exampleData {
 		for _, example := range data {
 			func(pkg string, example Example) {
@@ -28,7 +31,7 @@ func setupLinks(doc dom.Document) {
 					title := fmt.Sprintf("%s.%s %s", pkg, example.Type, example.Name)
 					modalPlaygroundLabel.SetTextContent(title)
 					modalPlaygroundDoc.SetTextContent(example.Doc)
-					modalPlaygroundCode.SetTextContent(example.Code)
+					codeChan <- example.Code
 					codeLines := 20 // This is the maxinum number of lines to show at once.
 					if cl := strings.Count(example.Code, "\n"); cl < codeLines {
 						codeLines = cl
@@ -38,4 +41,5 @@ func setupLinks(doc dom.Document) {
 			}(pkg, example)
 		}
 	}
+	return codeChan
 }

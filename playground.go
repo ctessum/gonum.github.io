@@ -1,7 +1,7 @@
 // This file is adapted from https://github.com/gopherjs/gopherjs.github.io.
 // Refer to playground_LICENSE for license information.
 
-//go:generate ./build.sh
+//go:generate ./update.sh
 
 package main
 

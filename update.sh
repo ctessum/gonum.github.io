@@ -6,7 +6,8 @@
 set -e
 
 #tmp=$(mktemp -d "${TMPDIR:-/tmp}/gopherjs_playground.XXXXXXXXXX")
-tmp="${GOPATH}/src/github.com/gonum/gonum.github.io/tmp"
+tmp="C:/Users/Chris/Documents/go/src/github.com/gonum/gonum.github.io/tmp"
+mkdir tmp
 
 cleanup() {
     rm -rf "$tmp"
@@ -37,6 +38,12 @@ gopherjs install -m github.com/gopherjs/gopherjs/js github.com/gopherjs/gopherjs
 mkdir -p pkg/github.com/gopherjs/gopherjs
 cp "$GOPATH"/pkg/*_js_min/github.com/gopherjs/gopherjs/js.a pkg/github.com/gopherjs/gopherjs/js.a
 cp "$GOPATH"/pkg/*_js_min/github.com/gopherjs/gopherjs/nosync.a pkg/github.com/gopherjs/gopherjs/nosync.a
+
+
+gopherjs get -m github.com/gonum/floats
+mkdir -p pkg/github.com/gonum
+cp -a "$GOPATH"/pkg/*_js_min/github.com/* pkg/github.com/
+
 
 # Make a copy of GOROOT that is user-writeable,
 # use it to build and copy out standard library packages.

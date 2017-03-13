@@ -40,7 +40,16 @@ cp "$GOPATH"/pkg/*_js_min/github.com/gopherjs/gopherjs/js.a pkg/github.com/gophe
 cp "$GOPATH"/pkg/*_js_min/github.com/gopherjs/gopherjs/nosync.a pkg/github.com/gopherjs/gopherjs/nosync.a
 
 
-gopherjs get -m github.com/gonum/floats
+gopherjs get -m \
+  github.com/gonum/floats \
+  github.com/gonum/matrix/mat64 \
+  github.com/gonum/plot/palette/moreland \
+  github.com/gonum/plot/plotter \
+  github.com/gonum/plot/plotutil \
+  github.com/gonum/plot/vg/vgtex \
+  github.com/gonum/stat \
+  github.com/gonum/stat/sampleuv
+
 mkdir -p pkg/github.com/gonum
 cp -a "$GOPATH"/pkg/*_js_min/github.com/* pkg/github.com/
 

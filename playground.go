@@ -39,10 +39,14 @@ func playground(codeChan chan string) {
 
 	app.NewController("PlaygroundCtrl", func(scope *angularjs.Scope) {
 
+		var closed bool
 		go func() {
 			for c := range codeChan {
 				scope.Set("code", c)
-				close(codeReady)
+				if !closed {
+					close(codeReady)
+					closed = true
+				}
 			}
 		}()
 		scope.Set("imports", true)

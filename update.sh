@@ -47,11 +47,15 @@ gopherjs get -m \
   github.com/gonum/plot/plotter \
   github.com/gonum/plot/plotutil \
   github.com/gonum/plot/vg/vgtex \
+  github.com/gonum/plot/vg/vgimg \
+  github.com/gonum/plot/vg/vgsvg \
+  github.com/gonum/plot/vg/vgpdf \
+  github.com/gonum/plot/vg/vgeps \
   github.com/gonum/stat \
   github.com/gonum/stat/sampleuv
 
 mkdir -p pkg/github.com/gonum
-cp -a "$GOPATH"/pkg/*_js_min/github.com/* pkg/github.com/
+cp -a "$GOPATH"/pkg/*_js_min/* pkg/
 
 
 # Make a copy of GOROOT that is user-writeable,

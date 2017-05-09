@@ -17,7 +17,8 @@ trap cleanup EXIT SIGHUP SIGINT SIGTERM
 
 go install github.com/gopherjs/gopherjs/...
 
-go generate github.com/gonum/gonum.github.io/internal/imports
+# go generate github.com/gonum/gonum.github.io/internal/imports
+go generate github.com/ctessum/gonum.github.io/internal/imports
 
 # Build playground itself.
 gopherjs build -m
@@ -59,6 +60,12 @@ gopherjs get -m \
 mkdir -p pkg/github.com/gonum
 cp -a "$GOPATH"/pkg/*_js_min/* pkg/
 
+# Get the dependencies for running these scripts.
+go get \
+  github.com/kr/pretty \
+  github.com/mvdan/xurls
+
+go run generate.go
 
 # Make a copy of GOROOT that is user-writeable,
 # use it to build and copy out standard library packages.

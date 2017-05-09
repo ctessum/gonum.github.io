@@ -17,7 +17,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gonum/gonum.github.io/internal/imports"
+	//"github.com/gonum/gonum.github.io/internal/imports"
+	"github.com/ctessum/gonum.github.io/internal/imports"
 	"github.com/gopherjs/gopherjs/compiler"
 	"github.com/gopherjs/gopherjs/js"
 	"github.com/neelance/go-angularjs"

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="playground">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="go-import" content="gonum.org/v1/ git https://github.com/gonum/gonum">
+    <title>Gonum | Welcome</title>
+
+    
+    <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="PlaygroundCtrl">
+    <div class="container">
+        <div class="jumbotron" style="background-color:white">
+            <h1 class="text-center">Gonum</h1>
+            <p class="text-center"><img src="https://raw.githubusercontent.com/gonum/license/master/gopher.png" width="200px" /></p>
+            <p class="text-center">Consistent, composable, and comprehensible scientific code</p>
+            <p class="text-center"><a class="btn btn-primary btn-lg" href="https://github.com/gonum" target="_blank" role="button">View the code</a></p>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <p>Manifesto goes here?</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <h2 class="text-center">Gonum by example...</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h4 class="text-justified">Click on the example acronyms or images below for interactive, runnable code, or click on the caption titles for additional documentation.</h4>
+            </div>
+        </div>
+        <hr> 
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/floats">floats</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('floats','AddConst','')"><h1 class="text-center">AC</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/floats#AddConst">floats.AddConst</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('floats','Add','Newslice')"><h1 class="text-center">AN</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/floats#Add">floats.Add</a> Newslice</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('floats','Add','Simple')"><h1 class="text-center">AS</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/floats#Add">floats.Add</a> Simple</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('floats','Add','Unequallengths')"><h1 class="text-center">AU</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/floats#Add">floats.Add</a> Unequallengths</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('floats','CumProd','')"><h1 class="text-center">CP</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/floats#CumProd">floats.CumProd</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('floats','CumSum','')"><h1 class="text-center">CS</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/floats#CumSum">floats.CumSum</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/graph/community">graph/community</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('graph/community','Profile','Multiplex')"><h1 class="text-center">PM</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/graph/community#Profile">community.Profile</a> Multiplex</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('graph/community','Profile','Simple')"><h1 class="text-center">PS</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/graph/community#Profile">community.Profile</a> Simple</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/integrate/quad">integrate/quad</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('integrate/quad','','')"><h1 class="text-center"></h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/integrate/quad#">quad_test.</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/matrix/mat64">matrix/mat64</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('matrix/mat64','Cholesky','')"><h1 class="text-center">C</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/matrix/mat64#Cholesky">mat64_test.Cholesky</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('matrix/mat64','CholeskySymRankOne','')"><h1 class="text-center">CSRO</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/matrix/mat64#CholeskySymRankOne">mat64_test.CholeskySymRankOne</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('matrix/mat64','Excerpt','')"><h1 class="text-center">E</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/matrix/mat64#Excerpt">mat64_test.Excerpt</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('matrix/mat64','Formatted','')"><h1 class="text-center">F</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/matrix/mat64#Formatted">mat64_test.Formatted</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('matrix/mat64','SymDense','SubsetSym')"><h1 class="text-center">SDSS</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/matrix/mat64#SymDense">mat64_test.SymDense</a> SubsetSym</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/palette/moreland">plot/palette/moreland</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/palette/moreland','','')"><h1 class="text-center"><img src=https://raw.githubusercontent.com/gonum/plot/master/palette/moreland/testdata/moreland_golden.png width="100%"></h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/palette/moreland#">moreland.</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter">plot/plotter</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','','')"><h1 class="text-center"></h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#">plotter.</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','BarChart','')"><h1 class="text-center">BC</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#BarChart">plotter.BarChart</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','BarChart','PositiveNegative')"><h1 class="text-center">BCPN</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#BarChart">plotter.BarChart</a> PositiveNegative</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','BoxPlot','')"><h1 class="text-center">BP</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#BoxPlot">plotter.BoxPlot</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Bubbles','')"><h1 class="text-center">B</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Bubbles">plotter.Bubbles</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Errors','')"><h1 class="text-center">E</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Errors">plotter.Errors</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Function','')"><h1 class="text-center">F</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Function">plotter.Function</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','HeatMap','')"><h1 class="text-center">HM</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#HeatMap">plotter.HeatMap</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Histogram','')"><h1 class="text-center">H</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Histogram">plotter.Histogram</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Image','')"><h1 class="text-center">I</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Image">plotter.Image</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','QuartPlot','')"><h1 class="text-center">QP</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#QuartPlot">plotter.QuartPlot</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Sankey','Grouped')"><h1 class="text-center"><img src=https://raw.githubusercontent.com/gonum/plot/master/plotter/testdata/sankeyGrouped_golden.png width="100%"></h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Sankey">plotter.Sankey</a> Grouped</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Sankey','Simple')"><h1 class="text-center"><img src=https://raw.githubusercontent.com/gonum/plot/master/plotter/testdata/sankeySimple_golden.png width="100%"></h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Sankey">plotter.Sankey</a> Simple</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','Scatter','')"><h1 class="text-center">S</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#Scatter">plotter.Scatter</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','','Rotation')"><h1 class="text-center">R</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#">plotter.</a> Rotation</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotter','','TimeSeries')"><h1 class="text-center">TS</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotter#">plotter.</a> TimeSeries</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotutil">plot/plotutil</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotutil','ErrorPoints','')"><h1 class="text-center">EP</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotutil#ErrorPoints">plotutil.ErrorPoints</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotutil','','Errpoints')"><h1 class="text-center">E</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotutil#">main.</a> Errpoints</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/plotutil','','StackedAreaChart')"><h1 class="text-center">SAC</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/plotutil#">main.</a> StackedAreaChart</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/vg/vgtex">plot/vg/vgtex</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('plot/vg/vgtex','','')"><h1 class="text-center"></h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/plot/vg/vgtex#">vgtex.</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/stat">stat</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','CanonicalCorrelations','')"><h1 class="text-center">CC</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#CanonicalCorrelations">stat_test.CanonicalCorrelations</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','PrincipalComponents','')"><h1 class="text-center">PC</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#PrincipalComponents">stat_test.PrincipalComponents</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','ROC','AUC')"><h1 class="text-center">ROCAUC</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#ROC">stat_test.ROC</a> AUC</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','ROC','Unweighted')"><h1 class="text-center">ROCU</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#ROC">stat_test.ROC</a> Unweighted</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','ROC','Weighted')"><h1 class="text-center">ROCW</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#ROC">stat_test.ROC</a> Weighted</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','CircularMean','')"><h1 class="text-center">CM</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#CircularMean">stat.CircularMean</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','Correlation','')"><h1 class="text-center">C</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#Correlation">stat.Correlation</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','Covariance','')"><h1 class="text-center">C</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#Covariance">stat.Covariance</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','Entropy','')"><h1 class="text-center">E</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#Entropy">stat.Entropy</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','ExKurtosis','')"><h1 class="text-center">EK</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#ExKurtosis">stat.ExKurtosis</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','GeometricMean','')"><h1 class="text-center">GM</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#GeometricMean">stat.GeometricMean</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','HarmonicMean','')"><h1 class="text-center">HM</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#HarmonicMean">stat.HarmonicMean</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','Histogram','')"><h1 class="text-center">H</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#Histogram">stat.Histogram</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','KullbackLeibler','')"><h1 class="text-center">KL</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#KullbackLeibler">stat.KullbackLeibler</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','Mean','')"><h1 class="text-center">M</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#Mean">stat.Mean</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','StdDev','')"><h1 class="text-center">SD</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#StdDev">stat.StdDev</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','StdErr','')"><h1 class="text-center">SE</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#StdErr">stat.StdErr</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat','Variance','')"><h1 class="text-center">V</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat#Variance">stat.Variance</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/stat/distuv">stat/distuv</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat/distuv','Normal','')"><h1 class="text-center">N</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat/distuv#Normal">distuv_test.Normal</a> </h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/stat/sampleuv">stat/sampleuv</a></h2> 
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat/sampleuv','MetropolisHastings','Burnin')"><h1 class="text-center">MHB</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat/sampleuv#MetropolisHastings">sampleuv.MetropolisHastings</a> Burnin</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('stat/sampleuv','MetropolisHastings','SamplingRate')"><h1 class="text-center">MHSR</h1></a>
+                    <div class="caption">
+                        <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/stat/sampleuv#MetropolisHastings">sampleuv.MetropolisHastings</a> SamplingRate</h4>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    
+    <div class="modal fade" id="modalPlayground" tabindex="-1" role="dialog" aria-labelledby="modalPlayground">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalPlaygroundLabel"></h4>
+                    <p id="modalPlaygroundDoc"></p>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input id="run-button" type="button" class="btn btn-primary" value="Run" data-loading-text="Running..." ng-click="run(false)" />
+                            <input type="button" class="btn btn-default" value="Format" ng-click="format()" />
+                            <label title="Rewrite imports on Format">
+                      <input ng-model="imports" type="checkbox" />Imports
+                    </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" class="btn btn-default" value="Share" ng-click="share()" />
+                            <input type="text" class="show-share-url- {{ showShareUrl}} " id="share-url" value=" {{ shareUrl}} " onfocus="select()" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea ng-model="code" id="code" class="form-control" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" style="font-family:monospace;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                          <h4>Output:</h4>
+                            <samp>
+                              <div ng-repeat="line in output" class=" {{ line.type}} ">{{line.content}}&nbsp;</div>
+                            </samp>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="plot_window"></div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+    <script src="gonum.github.io.js"></script>
+</body>
+
+</html>

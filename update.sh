@@ -5,9 +5,8 @@
 
 set -e
 
-#tmp=$(mktemp -d "${TMPDIR:-/tmp}/gopherjs_playground.XXXXXXXXXX")
-tmp="C:/Users/Chris/Documents/go/src/github.com/gonum/gonum.github.io/tmp"
-mkdir tmp
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/gopherjs_playground.XXXXXXXXXX")
+
 
 cleanup() {
     rm -rf "$tmp"
@@ -41,7 +40,10 @@ cp "$GOPATH"/pkg/*_js_min/github.com/gopherjs/gopherjs/nosync.a pkg/github.com/g
 
 
 gopherjs get -m \
+  honnef.co/go/js/dom \
   github.com/gonum/floats \
+  github.com/gonum/graph/community \
+  github.com/gonum/integrate \
   github.com/gonum/matrix/mat64 \
   github.com/gonum/plot/palette/moreland \
   github.com/gonum/plot/plotter \

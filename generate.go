@@ -86,7 +86,6 @@ func generateExamples() (map[template.HTML][]Example, error) {
 		}
 		for pkgName, pkg := range pkgs {
 			descriptionPath := strings.Trim(strings.Split(path, "gonum")[1], "/\\") // This is the path we use for the description
-			fmt.Println(descriptionPath)
 			importPath := "github.com" + strings.Split(path, "github.com")[1]
 			docpkg := doc.New(pkgs2[pkgName], importPath, 0)
 			var files []*ast.File
@@ -192,7 +191,7 @@ func playToCmd(play *ast.File, fset *token.FileSet) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return string(b.Bytes()), nil
+	return string(addPlotSaver(b.Bytes())), nil
 }
 
 // codeToCmd converts a go/doc.Example.Code node into
@@ -203,37 +202,63 @@ func codeToCmd(code ast.Node, fset *token.FileSet, docpkg *doc.Package) (string,
 	if err != nil {
 		return "", err
 	}
-	cmd, err := exampleToCmd(b)
+	cmd, err := exampleToCmd(b, docpkg)
 	if err != nil {
 		return "", err
 	}
-	cmd = addPackageName(docpkg, cmd)
+
 	return cmd, nil
 }
 
 // exampleToCmd converts a package example to a standalone program.
-func exampleToCmd(b *bytes.Buffer) (string, error) {
+func exampleToCmd(b *bytes.Buffer, docpkg *doc.Package) (string, error) {
 	example := append(([]byte)("package main\n\nfunc main() "), b.Bytes()...)
-	bb, err := imports.Process("./", example, nil)
+	example = addPlotSaver(addPackageName(docpkg, example))
+	var err error
+	example, err = imports.Process("./", example, nil)
 	if err != nil {
 		return "", err
 	}
-	return string(bb), nil
+	return string(example), nil
+}
+
+func addPlotSaver(cmd []byte) []byte {
+	exp, err := regexp.Compile(`err(.*)p.Save(.*)\)`)
+	if err != nil {
+		panic(err)
+	}
+
+	plotSave := ([]byte)(`
+	// Normally, we would save the figure using plot.Save(), but here we are going
+	// to directly save it in this webpage.
+	img := vgsvg.New(vg.Points(400), vg.Points(300))
+	p.Draw(draw.New(img))
+	b := new(bytes.Buffer)
+	if _, err = img.WriteTo(b); err != nil {
+		log.Panic(err)
+	}
+	plotWindow := dom.GetWindow().Document().GetElementByID("plot_window").(*dom.HTMLDivElement)
+	plotWindow.SetInnerHTML(string(b.Bytes()))
+`)
+	return exp.ReplaceAll(cmd, plotSave)
 }
 
 // addPackageName adds the import statement in from of items that
 // are part of the current package so that they will compile as part
 // of a standalone program.
 // TODO: Make this better.
-func addPackageName(docpkg *doc.Package, cmd string) string {
+func addPackageName(docpkg *doc.Package, cmd []byte) []byte {
 	for _, t := range docpkg.Types {
 		for _, f := range t.Funcs {
-			cmd = strings.Replace(cmd, f.Name+"(", docpkg.Name+"."+f.Name+"(", -1)
+			funcReplace := ([]byte)(docpkg.Name + "." + f.Name + "(")
+			cmd = bytes.Replace(cmd, ([]byte)(f.Name+"("), funcReplace, -1)
 		}
-		cmd = strings.Replace(cmd, t.Name+"{", docpkg.Name+"."+t.Name+"{", -1)
+		typeReplace := ([]byte)(docpkg.Name + "." + t.Name + "{")
+		cmd = bytes.Replace(cmd, ([]byte)(t.Name+"{"), typeReplace, -1)
 	}
 	for _, f := range docpkg.Funcs {
-		cmd = strings.Replace(cmd, f.Name+"(", docpkg.Name+"."+f.Name+"(", -1)
+		funcReplace := ([]byte)(docpkg.Name + "." + f.Name + "(")
+		cmd = bytes.Replace(cmd, ([]byte)(f.Name+"("), funcReplace, -1)
 	}
 	return cmd
 }

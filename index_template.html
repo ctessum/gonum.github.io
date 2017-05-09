@@ -45,7 +45,7 @@
             <h2 class="text-center"><a href="https://godoc.org/github.com/gonum/{{$package}}">{{ $package }}</a></h2> {{ range $index, $example := $data }}
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
-                    <a id="{{ $example.PkgName }}{{ $example.Type}}{{ $example.Name}}Link" href="#modalPlayground" role="button" data-toggle="modal"><h1 class="text-center">{{ if eq $example.Img "" }}{{ $example.Abbrev }}{{ else }}<img src={{ $example.Img }} width="100%">{{ end }}</h1></a>
+                    <a href="#modalPlayground" role="button" data-toggle="modal" ng-click="loadCode('{{ $package }}','{{ $example.Type }}','{{ $example.Name }}')"><h1 class="text-center">{{ if eq $example.Img "" }}{{ $example.Abbrev }}{{ else }}<img src={{ $example.Img }} width="100%">{{ end }}</h1></a>
                     <div class="caption">
                         <h4 class="text-center"><a href="https://godoc.org/github.com/gonum/{{$package}}#{{ $example.Type }}">{{ $example.PkgName }}.{{ $example.Type}}</a> {{ $example.Name}}</h4>
                     </div>
@@ -69,25 +69,33 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="button" class="btn btn-primary" value="Run" ng-click="run(false)" />
+                            <input id="run-button" type="button" class="btn btn-primary" value="Run" data-loading-text="Running..." ng-click="run(false)" />
                             <input type="button" class="btn btn-default" value="Format" ng-click="format()" />
                             <label title="Rewrite imports on Format">
                       <input ng-model="imports" type="checkbox" />Imports
                     </label>
                         </div>
                         <div class="col-md-6">
-                            <input type="button"  class="btn btn-default" value="Share" ng-click="share()" />
+                            <input type="button" class="btn btn-default" value="Share" ng-click="share()" />
                             <input type="text" class="show-share-url-{{" {{ "}}showShareUrl{{"}} "}}" id="share-url" value="{{" {{ "}}shareUrl{{"}} "}}" onfocus="select()" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <textarea ng-model="code" id="code" class="form-control" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+                            <textarea ng-model="code" id="code" class="form-control" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" style="font-family:monospace;"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <pre ng-repeat="line in output" class="{{" {{ "}}line.type{{"}} "}}">{{"{{"}}line.content{{"}}"}}&nbsp;</pre>
+                          <h4>Output:</h4>
+                            <samp>
+                              <div ng-repeat="line in output" class="{{" {{ "}}line.type{{"}} "}}">{{"{{"}}line.content{{"}}"}}&nbsp;</div>
+                            </samp>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="plot_window"></div> <!-- Placeholder for SVG plots -->
                         </div>
                     </div>
                 </div>

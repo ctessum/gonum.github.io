@@ -7,6 +7,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"go/ast"
 	"go/format"
 	"go/parser"
@@ -30,8 +31,14 @@ var output []Line
 
 const snippetStoreHost = "https://snippets.gopherjs.org"
 
-func playground(codeChan chan string) {
+func main() {
+	doc := dom.GetWindow().Document()
 	var location = dom.GetWindow().Top().Location() // We might be inside an iframe, but want to use the location of topmost window.
+
+	modalPlaygroundLabel := doc.GetElementByID("modalPlaygroundLabel").(*dom.HTMLHeadingElement)
+	modalPlaygroundDoc := doc.GetElementByID("modalPlaygroundDoc").(*dom.HTMLParagraphElement)
+	modalPlaygroundCode := doc.GetElementByID("code").(*dom.HTMLTextAreaElement)
+	modalPlotWindow := doc.GetElementByID("plot_window").(*dom.HTMLDivElement)
 
 	codeReady := make(chan struct{}) // Used to synchronize when "code" value is ready.
 
@@ -39,25 +46,51 @@ func playground(codeChan chan string) {
 
 	app.NewController("PlaygroundCtrl", func(scope *angularjs.Scope) {
 
-		var closed bool
-		go func() {
-			for c := range codeChan {
-				scope.Set("code", c)
-				if !closed {
-					close(codeReady)
-					closed = true
+		var ready bool
+		scope.Set("loadCode", func(pkgName, Type, name string) {
+			data, ok := exampleData[pkgName]
+			if !ok {
+				panic(fmt.Errorf("missing package %s example data", pkgName))
+			}
+			var found bool
+			for _, ex := range data {
+				if ex.Type == Type && ex.Name == name {
+
+					scope.Set("output", []Line{})
+					modalPlotWindow.SetInnerHTML("")
+					scope.Set("code", ex.Code)
+
+					scope.Set("imports", true)
+					scope.Set("shareUrl", "")
+					scope.Set("showShareUrl", false)
+
+					title := fmt.Sprintf("%s.%s %s", pkgName, ex.Type, ex.Name)
+					modalPlaygroundLabel.SetTextContent(title)
+					modalPlaygroundDoc.SetTextContent(ex.Doc)
+					codeLines := 20 // This is the maxinum number of lines to show at once.
+					if cl := strings.Count(ex.Code, "\n"); cl < codeLines {
+						codeLines = cl
+					}
+					modalPlaygroundCode.SetAttribute("rows", fmt.Sprintf("%d", codeLines))
+
+					if !ready {
+						close(codeReady)
+						ready = true
+					}
+					found = true
 				}
 			}
-		}()
-		scope.Set("imports", true)
-		scope.Set("shareUrl", "")
-		scope.Set("showShareUrl", false)
+			if !found {
+				panic(fmt.Errorf("couldn't find example %s.%s %s", pkgName, Type, name))
+			}
+		})
 
 		packages := make(map[string]*compiler.Archive)
 		var pkgsToLoad map[string]struct{}
 		importContext := &compiler.ImportContext{
 			Packages: make(map[string]*types.Package),
 			Import: func(path string) (*compiler.Archive, error) {
+				println(path)
 				if pkg, found := packages[path]; found {
 					return pkg, nil
 				}
@@ -75,45 +108,14 @@ func playground(codeChan chan string) {
 			scope.Set("showShareUrl", false)
 			location.Hash = ""
 		})
-		codeArea.On("keydown", func(e *angularjs.Event) {
-			toInsert := ""
-			switch e.KeyCode {
-			case '\t':
-				toInsert = "\t"
-			case '\r':
-				toInsert = "\n"
-				start := codeArea.Prop("selectionStart").Int()
-				code := scope.Get("code").String()
-				i := strings.LastIndex(code[:start], "\n") + 1
-				for i < start {
-					c := code[i]
-					if c != ' ' && c != '\t' {
-						break
-					}
-					toInsert += string(c)
-					i++
-				}
-			}
-			if toInsert != "" {
-				scope.Set("showShareUrl", false)
-				location.Hash = ""
-
-				start := codeArea.Prop("selectionStart").Int()
-				end := codeArea.Prop("selectionEnd").Int()
-				code := scope.Get("code").String()
-				scope.Apply(func() {
-					scope.Set("code", code[:start]+toInsert+code[end:])
-				})
-				codeArea.SetProp("selectionStart", start+len(toInsert))
-				codeArea.SetProp("selectionEnd", start+len(toInsert))
-				e.PreventDefault()
-			}
-		})
+		codeArea.On("keydown", codeAreaKeyDown(scope, codeArea, location))
 
 		var run func(bool)
 		run = func(loadOnly bool) {
-			output = nil
-			scope.Set("output", output)
+			button := angularjs.ElementById("run-button")
+			runningButton := button.Call("button", "loading")
+			scope.Set("output", nil)
+			modalPlotWindow.SetInnerHTML("")
 			pkgsToLoad = make(map[string]struct{})
 
 			file, err := parser.ParseFile(fileSet, "prog.go", []byte(scope.Get("code").String()), parser.ParseComments)
@@ -123,9 +125,11 @@ func playground(codeChan chan string) {
 						output = append(output, Line{"type": "err", "content": entry.Error()})
 					}
 					scope.Set("output", output)
+					runningButton.Call("button", "reset")
 					return
 				}
 				scope.Set("output", []Line{Line{"type": "err", "content": err.Error()}})
+				runningButton.Call("button", "reset")
 				return
 			}
 
@@ -133,14 +137,16 @@ func playground(codeChan chan string) {
 			packages["main"] = mainPkg
 			if err != nil && len(pkgsToLoad) == 0 {
 				if list, ok := err.(compiler.ErrorList); ok {
-					var output []Line
+					output = []Line{}
 					for _, entry := range list {
 						output = append(output, Line{"type": "err", "content": entry.Error()})
 					}
 					scope.Set("output", output)
+					runningButton.Call("button", "reset")
 					return
 				}
 				scope.Set("output", []Line{Line{"type": "err", "content": err.Error()}})
+				runningButton.Call("button", "reset")
 				return
 			}
 
@@ -160,6 +166,7 @@ func playground(codeChan chan string) {
 							scope.Apply(func() {
 								scope.Set("output", []Line{Line{"type": "err", "content": `failed to load package "` + path + `"`}})
 							})
+							runningButton.Call("button", "reset")
 							return
 						}
 
@@ -169,18 +176,22 @@ func playground(codeChan chan string) {
 							scope.Apply(func() {
 								scope.Set("output", []Line{Line{"type": "err", "content": err.Error()}})
 							})
+							runningButton.Call("button", "reset")
 							return
 						}
 						pkgsReceived++
 						if pkgsReceived == len(pkgsToLoad) {
+							runningButton.Call("button", "reset")
 							run(loadOnly)
 						}
 					}(path)
 				}
+				runningButton.Call("button", "reset")
 				return
 			}
 
 			if loadOnly {
+				runningButton.Call("button", "reset")
 				return
 			}
 
@@ -190,6 +201,7 @@ func playground(codeChan chan string) {
 			jsCode.WriteString("} catch (err) {\ngoPanicHandler(err.message);\n}\n")
 			js.Global.Set("$checkForDeadlock", true)
 			js.Global.Call("eval", js.InternalObject(jsCode.String()))
+			runningButton.Call("button", "reset")
 		}
 		scope.Set("run", run)
 		go func() {
@@ -295,4 +307,41 @@ func setupEnvironment(scope *angularjs.Scope) {
 		output = append(output, Line{"type": "err", "content": "panic: " + msg})
 		scope.Set("output", output)
 	}))
+}
+
+func codeAreaKeyDown(scope *angularjs.Scope, codeArea *angularjs.JQueryElement, location *dom.Location) func(*angularjs.Event) {
+	return func(e *angularjs.Event) {
+		toInsert := ""
+		switch e.KeyCode {
+		case '\t':
+			toInsert = "\t"
+		case '\r':
+			toInsert = "\n"
+			start := codeArea.Prop("selectionStart").Int()
+			code := scope.Get("code").String()
+			i := strings.LastIndex(code[:start], "\n") + 1
+			for i < start {
+				c := code[i]
+				if c != ' ' && c != '\t' {
+					break
+				}
+				toInsert += string(c)
+				i++
+			}
+		}
+		if toInsert != "" {
+			scope.Set("showShareUrl", false)
+			location.Hash = ""
+
+			start := codeArea.Prop("selectionStart").Int()
+			end := codeArea.Prop("selectionEnd").Int()
+			code := scope.Get("code").String()
+			scope.Apply(func() {
+				scope.Set("code", code[:start]+toInsert+code[end:])
+			})
+			codeArea.SetProp("selectionStart", start+len(toInsert))
+			codeArea.SetProp("selectionEnd", start+len(toInsert))
+			e.PreventDefault()
+		}
+	}
 }
